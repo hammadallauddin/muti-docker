@@ -1,10 +1,14 @@
 sudo: required
+
 services:
  - docker
+
 before_install: 
   - docker build -t hammadallauddin/multi-test -f ./client/Dockerfile.dev ./client
+
 script:
   - docker run hammadallauddin/multi-test npm test -- --coverage
+
 after_success:
   - docker build -t hammadallauddin/multi-client ./client
   - docker build -t hammadallauddin/multi-nginx ./nginx
